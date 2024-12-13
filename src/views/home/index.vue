@@ -1,8 +1,9 @@
 <template>
-<RouterView />
+首页
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+
 </script>
 
 <style scoped>
