@@ -9,12 +9,13 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-    resolvers: [ElementPlusResolver()]
-  }),
+      resolvers: [ElementPlusResolver()]
+    }),
     Components({
       dts: false,
       resolvers: [ElementPlusResolver()]
-    }),],
+    })
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -22,9 +23,7 @@ export default defineConfig({
   },
   css: {
     preprocessorOptions: {
-      scss: {
-        additionalData: `@import "./src/styles/variable.scss";`
-      }
+
     }
   },
 })

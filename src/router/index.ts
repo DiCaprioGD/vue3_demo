@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory, } from 'vue-router'
+import {useUserStore} from "@/store";
 
 export const routes = [
     {
         path: '/',
-        redirect: '/login',
+        redirect: '/index',
+    },
+    {
+        name: 'index',
+        path: '/index',
+        component: () => import("@/views/index/index.vue")
     },
     {
         name: 'login',
@@ -26,6 +32,14 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
+    const store = useUserStore()
+    if (!store.user.token) {
+        if (to.name === 'login') {
+            return next()
+        } else {
+            return next({ name: 'login' })
+        }
+    }
     next()
 })
 

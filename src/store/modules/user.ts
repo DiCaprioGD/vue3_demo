@@ -1,18 +1,34 @@
 import { defineStore } from "pinia";
-import type { UserType } from "../types/user";
+import type { UserType } from "@/types/user";
 import { ref } from 'vue';
 
 export const useUserStore = defineStore("user", () => {
     const user = ref<UserType>(
         {
-            name: "cs"
+            name: '',
+            token: '',
+            isLoggedIn: false
         });
     const updateUser = (obj: UserType) => {
-        user.value.name = obj.name;
+        user.value = obj;
+        user.value.isLoggedIn = true
+        localStorage.setItem('user', JSON.stringify(obj));
     };
-
+    const logout = () => {
+        user.value = {}
+        localStorage.removeItem('user');
+    };
+    const loadUser = () => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            user.value = JSON.parse(storedUser);
+            user.value.isLoggedIn = true;
+        }
+    };
     return {
         user,
+        logout,
+        loadUser,
         updateUser
     }
 });
