@@ -15,8 +15,9 @@ export const useUserStore = defineStore("user", () => {
         localStorage.setItem('user', JSON.stringify(obj));
     };
     const logout = () => {
-        user.value = {}
-        localStorage.removeItem('user');
+        user.value.token = ''
+        user.value.isLoggedIn = false
+        updateUser(user.value);
     };
     const loadUser = () => {
         const storedUser = localStorage.getItem('user');

@@ -185,4 +185,7 @@ defineExpose({
   line-height: 40px;
   font-size: 15px;
 }
+:deep(.el-form-item__label) {
+  color: var(--font-color-gray-3);
+}
 </style>
