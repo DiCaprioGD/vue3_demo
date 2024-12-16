@@ -18,6 +18,10 @@ export const useUserStore = defineStore("user", () => {
         user.value.token = ''
         user.value.isLoggedIn = false
         updateUser(user.value);
+        if (!user.value.rememberMe) {
+            user.value = {}
+            localStorage.removeItem('user')
+        }
     };
     const loadUser = () => {
         const storedUser = localStorage.getItem('user');

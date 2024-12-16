@@ -1,34 +1,106 @@
 <template>
   <div class="content">
-    <el-form :rules="rules" status-icon ref="ruleFormRef" :model="form" v-bind="setAttrs(formOption)">
-      <el-form-item v-for="(item, index) in formItem?.filter(info=>!info.isHidden)" :key="index" v-bind="setAttrs(item)" :prop="item.key">
-        <el-input v-if="item.itemType === 'input' || item.itemType === 'ipInput'" :type="item.type || 'text'" :prefix-icon="item.prefixIcon ? item.icon : ''" :suffix-icon="item.suffixIcon ? item.icon : ''"
-          :autocomplete="item.autocomplete" :placeholder="item.placeholder ? item.placeholder : `请输入${item.label}`" :disabled="item.disabled" :show-password="item.showPassword"
-          v-model="form[item.key]" :style="{ width: item.contentWidth || '180px' }" />
-        <el-date-picker v-if="item.itemType === 'datePicker'" v-model="form[item.key]" :disabled="item.disabled"
-          type="datetime" :placeholder="`请选择${item.label}`" format="YYYY/MM/DD HH:mm:ss"
-          value-format="YYYY-MM-DD HH:mm:ss" :style="{ width: item.contentWidth || '180px' }" />
-        <el-date-picker v-if="item.itemType === 'dateTimeRange'" v-model="form[item.key]" v-bind="setAttrs(item)"
-          :style="{ width: item.contentWidth || '400px' }" type="datetimerange" format="YYYY/MM/DD HH:mm:ss"
-          value-format="YYYY-MM-DD HH:mm:ss" :default-time="defaultTime" range-separator="到" start-placeholder="请选择开始时间"
-          end-placeholder="请选择结束时间" />
-          <el-date-picker v-if="item.itemType === 'date'" v-model="form[item.key]" v-bind="setAttrs(item)"
-          type="date" format="YYYY/MM/DD" value-format="YYYY-MM-DD" :style="{ width: item.contentWidth || '180px' }"/>
-        <el-time-picker v-if="item.itemType === 'timePicker'" v-model="form[item.key]" v-bind="setAttrs(item)"
-          value-format="HH:mm:ss" :placeholder="`请选择${item.label}`" :style="{ width: item.contentWidth || '180px' }" />
-        <el-input-number v-else-if="item.itemType === 'numberInput'" :type="item.type || 'text'"
-          :autocomplete="item.autocomplete" :min="item.min || 1" :placeholder="`请输入${item.label}`"
-          :disabled="item.disabled" v-model="form[item.key]" :style="{ width: item.contentWidth || '180px' }"
-          @change="item.change" />
-        <el-select v-else-if="item.itemType === 'select'" :placeholder="`请选择${item.label}`" :multiple="item.multiple"
-          :collapse-tags="item.collapseTags" :collapse-tags-tooltip="item.collapseTagsTooltip" :disabled="item.disabled"
-          :clearable="!item.required" v-model="form[item.key]" :style="{ width: item.contentWidth || '180px' }"
-          @change="item.change">
+    <el-form
+      :rules="rules"
+      status-icon
+      ref="ruleFormRef"
+      :model="form"
+      v-bind="setAttrs(formOption)"
+    >
+      <el-form-item
+        v-for="(item, index) in formItem?.filter((info) => !info.isHidden)"
+        :key="index"
+        v-bind="setAttrs(item)"
+        :prop="item.key"
+      >
+        <el-input
+          v-if="item.itemType === 'input' || item.itemType === 'ipInput'"
+          :type="item.type || 'text'"
+          :prefix-icon="item.prefixIcon ? item.icon : ''"
+          :suffix-icon="item.suffixIcon ? item.icon : ''"
+          :autocomplete="item.autocomplete"
+          :placeholder="item.placeholder ? item.placeholder : `请输入${item.label}`"
+          :disabled="item.disabled"
+          :show-password="item.showPassword"
+          v-model="form[item.key]"
+          :style="{ width: item.contentWidth || '180px' }"
+        />
+        <el-date-picker
+          v-if="item.itemType === 'datePicker'"
+          v-model="form[item.key]"
+          :disabled="item.disabled"
+          type="datetime"
+          :placeholder="`请选择${item.label}`"
+          format="YYYY/MM/DD HH:mm:ss"
+          value-format="YYYY-MM-DD HH:mm:ss"
+          :style="{ width: item.contentWidth || '180px' }"
+        />
+        <el-date-picker
+          v-if="item.itemType === 'dateTimeRange'"
+          v-model="form[item.key]"
+          v-bind="setAttrs(item)"
+          :style="{ width: item.contentWidth || '400px' }"
+          type="datetimerange"
+          format="YYYY/MM/DD HH:mm:ss"
+          value-format="YYYY-MM-DD HH:mm:ss"
+          :default-time="defaultTime"
+          range-separator="到"
+          start-placeholder="请选择开始时间"
+          end-placeholder="请选择结束时间"
+        />
+        <el-date-picker
+          v-if="item.itemType === 'date'"
+          v-model="form[item.key]"
+          v-bind="setAttrs(item)"
+          type="date"
+          format="YYYY/MM/DD"
+          value-format="YYYY-MM-DD"
+          :style="{ width: item.contentWidth || '180px' }"
+        />
+        <el-time-picker
+          v-if="item.itemType === 'timePicker'"
+          v-model="form[item.key]"
+          v-bind="setAttrs(item)"
+          value-format="HH:mm:ss"
+          :placeholder="`请选择${item.label}`"
+          :style="{ width: item.contentWidth || '180px' }"
+        />
+        <el-input-number
+          v-else-if="item.itemType === 'numberInput'"
+          :type="item.type || 'text'"
+          :autocomplete="item.autocomplete"
+          :min="item.min || 1"
+          :placeholder="`请输入${item.label}`"
+          :disabled="item.disabled"
+          v-model="form[item.key]"
+          :style="{ width: item.contentWidth || '180px' }"
+          @change="item.change"
+        />
+        <el-select
+          v-else-if="item.itemType === 'select'"
+          :placeholder="`请选择${item.label}`"
+          :multiple="item.multiple"
+          :collapse-tags="item.collapseTags"
+          :collapse-tags-tooltip="item.collapseTagsTooltip"
+          :disabled="item.disabled"
+          :clearable="!item.required"
+          v-model="form[item.key]"
+          :style="{ width: item.contentWidth || '180px' }"
+          @change="item.change"
+        >
           <template v-if="item.options && item.options.length > 0">
-            <el-option v-for="(option, index) in item.options" :key="index" v-bind="setAttrs(option)" />
+            <el-option
+              v-for="(option, index) in item.options"
+              :key="index"
+              v-bind="setAttrs(option)"
+            />
           </template>
           <template v-else>
-            <el-option v-for="(option, index) in optionObject[item.key]" :key="index" v-bind="setAttrs(option)" />
+            <el-option
+              v-for="(option, index) in optionObject[item.key]"
+              :key="index"
+              v-bind="setAttrs(option)"
+            />
           </template>
         </el-select>
         <el-checkbox v-if="item.itemType === 'checkbox'" v-model="form[item.key]"></el-checkbox>
@@ -58,7 +130,7 @@ const emit = defineEmits(['confirm', 'cancel'])
 
 const props = defineProps({
   formItem: Array as () => FormItem[],
-  formOption: Object,
+  formOption: Object
 })
 
 const rules = reactive<FormRules>({})
@@ -86,7 +158,9 @@ props.formItem?.forEach(async (item, propsItemIndex) => {
     rules[item.key] = [
       {
         required: true,
-        message: item.label ? `请${item.itemType !== 'input' && item.itemType !== 'ipInput' ? '选择' : '输入'}${item.label}` : item.placeholder,
+        message: item.label
+          ? `请${item.itemType !== 'input' && item.itemType !== 'ipInput' ? '选择' : '输入'}${item.label}`
+          : item.placeholder,
         trigger: trigger
       }
     ]
@@ -105,7 +179,7 @@ props.formItem?.forEach(async (item, propsItemIndex) => {
       }
     ]
     if (rules[item.key] && (rules[item.key] as Array<any>).length > 0) {
-      ; (rules[item.key] as Array<any>).push(..._rule)
+      ;(rules[item.key] as Array<any>).push(..._rule)
     } else {
       rules[item.key] = _rule as Array<any>
     }
@@ -113,7 +187,7 @@ props.formItem?.forEach(async (item, propsItemIndex) => {
   /*个性化自定义校验*/
   if (item.rule && item.rule.length > 0) {
     if (rules[item.key] && (rules[item.key] as Array<any>).length > 0) {
-      ; (rules[item.key] as Array<any>).push(...item.rule)
+      ;(rules[item.key] as Array<any>).push(...item.rule)
     } else {
       rules[item.key] = item.rule as Array<any>
     }

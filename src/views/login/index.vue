@@ -72,7 +72,7 @@ const loginItem = ref([
     contentWidth: '100%'
   },
   {
-    key: 'password',
+    key: 'repassword',
     itemType: 'input',
     type: 'password',
     placeholder: '请再次输入您的密码',
@@ -96,8 +96,12 @@ watch(() => isRegister.value, () => {
 const btnConfirm = () => {
   form.value.saveFn()
 }
-const login = () => {
-  store.updateUser({name: '111', token: '111'})
+const login = (form: Record<any, any>) => {
+  let obj = {
+    ...form,
+    token: '111'
+  }
+  store.updateUser(obj)
   router.push('/index')
 }
 const btnHref = (link: string) => {
@@ -107,6 +111,11 @@ const btnHref = (link: string) => {
 onMounted(() => {
   if (store.user.token) {
     router.push('/index')
+  }
+  if (store.user.rememberMe) {
+    loginItem.value[0].value = store.user.username
+    loginItem.value[1].value = store.user.password
+    loginItem.value[3].value = store.user.rememberMe
   }
 })
 </script>

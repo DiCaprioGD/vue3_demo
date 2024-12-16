@@ -3,4 +3,5 @@ export interface UserType {
     token?: string;
     password?: string | number;
     isLoggedIn?: boolean;
+    rememberMe?: boolean;
 }
