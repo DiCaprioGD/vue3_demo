@@ -8,7 +8,90 @@ body {
     /*中文*/PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Source Han Sans CN,sans-serif;
 }
 :root {
+  --gray-color-1: #f3f3f3;
+  --gray-color-2: #eee;
+  --gray-color-3: #e8e8e8;
+  --gray-color-4: #ddd;
+  --gray-color-5: #c6c6c6;
+  --gray-color-6: #a6a6a6;
+  --gray-color-7: #8b8b8b;
+  --gray-color-8: #777;
+  --gray-color-9: #5e5e5e;
+  --gray-color-10: #4b4b4b;
+  --gray-color-11: #393939;
+  --gray-color-12: #2c2c2c;
+  --gray-color-13: #242424;
+  --gray-color-14: #181818;
+  --font-white-1: #ffffff;
+  --size-1: 2px;
+  --size-2: 4px;
+  --size-3: 6px;
+  --size-4: 8px;
+  --size-5: 12px;
+  --size-6: 16px;
+  --size-7: 20px;
+  --size-8: 24px;
+  --size-9: 28px;
+  --size-10: 32px;
+  --size-11: 36px;
+  --size-12: 40px;
+  --size-13: 48px;
+  --size-14: 56px;
+  --size-15: 64px;
+  --size-16: 72px;
+  --radius-small: 2px;
+  --radius-default: 3px;
+  --radius-medium: 6px;
+  --radius-large: 9px;
+  --radius-extraLarge: 12px;
+  --radius-round: 999px;
+  --radius-circle: 50%;
+  --font-white-2: rgba(255, 255, 255, 0.55);
+  --font-white-3: rgba(255, 255, 255, 0.35);
+  --font-white-4: rgba(255, 255, 255, 0.22);
   --font-color-gray-1: rgba(0, 0, 0, 0.9);
   --font-color-gray-2: rgba(0, 0, 0, 0.6);
   --font-color-gray-3: rgba(0, 0, 0, 0.3);
+  --card-bg-color-1: rgba(238, 238, 238, 0.9);
+  --padding-LR-1: var(--size-2);
+  --padding-LR-2: var(--size-4);
+  --padding-LR-3: var(--size-5);
+  --padding-LR-4: var(--size-6)
+}
+.nav-item {
+  width: var(--size-10);
+  height: var(--size-10);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-body-medium);
+  color: var(--text-color-primary);
+  box-sizing: border-box;
+  list-style: none;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  outline: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-radius: var(--radius-default);
+  transition: all 0.2s linear;
+  touch-action: manipulation;
+  text-decoration: none;
+}
+.nav-icon-item {
+  padding: 0;
+  width: var(--size-10);
+}
+.nav-item-text {
+  padding-left: var(--padding-LR-4);
+  padding-right: var(--padding-LR-4);
+}
+.nav-item:hover {
+  background-color: var(--gray-color-1);
 }

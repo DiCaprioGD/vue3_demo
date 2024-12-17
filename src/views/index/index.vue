@@ -1,21 +1,112 @@
 <template>
-<div>
-  index
-  <el-button @click="logout">退出登录</el-button>
-</div>
+  <div class="main">
+    <header>
+      <Header></Header>
+    </header>
+    <div class="content">
+      <div v-if="!useLayout.layout.isNav" class="content_menu">
+        <LayoutMenu></LayoutMenu>
+      </div>
+      <div class="content_main">
+        <div class="breadcrumb" v-if="useLayout.layout.isBreadcrumb">
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item
+              v-for="(item, index) in breadcrumbList"
+              :key="index"
+              :to="item.path"
+            >
+              {{ item.name }}
+            </el-breadcrumb-item>
+          </el-breadcrumb>
+        </div>
+        <el-card class="card">
+          <RouterView />
+        </el-card>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {useUserStore} from "@/store";
-import router from "@/router";
-
+import { ref, onMounted, watch } from 'vue'
+import { useUserStore, useLayoutStore } from '@/store'
+import Header from '@/components/layout/header.vue'
+import LayoutMenu from '@/components/layout/layoutMenu.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const userStore = useUserStore()
-const logout = () => {
-  userStore.logout();
-  router.push('/login')
+const useLayout = useLayoutStore()
+const breadcrumbList = ref([])
+onMounted(() => {
+  breadcrumbList.value = findBreadcrumb(useLayout.layout.menuList, route.path)
+})
+watch(
+  () => route.path,
+  (newPath) => {
+    breadcrumbList.value = findBreadcrumb(useLayout.layout.menuList, newPath)
+  }
+)
+const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
+  for (const item of menu) {
+    const newBreadcrumb: any = [...breadcrumb, { name: item.name, path: item.path }]
+    if (item.path === path) {
+      return newBreadcrumb
+    }
+    if (item.children && item.children.length > 0) {
+      const childBreadcrumb = findBreadcrumb(item.children, path, newBreadcrumb)
+      if (childBreadcrumb) {
+        return childBreadcrumb
+      }
+    }
+  }
+  return null
 }
 </script>
 
 <style scoped lang="scss">
-
+.main {
+  width: 100%;
+  height: 100%;
+  .content {
+    height: calc(100% - 60px);
+    display: flex;
+    .content_menu {
+      height: 100%;
+      :deep(.el-menu) {
+        border-right: none;
+      }
+      :deep(.el-menu-vertical-menu:not(.el-menu--collapse)) {
+        width: 200px;
+        min-height: 400px;
+      }
+      :deep(.el-icon svg) {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+      }
+    }
+    .content_main {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      flex: 1;
+      padding: 1%;
+      background-color: var(--card-bg-color-1);
+      .breadcrumb {
+        height: 3%;
+      }
+      .card {
+        width: 100%;
+        flex: 1;
+        :deep(.el-card) {
+          box-shadow: none;
+        }
+        :deep(.el-card__body) {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
 </style>
