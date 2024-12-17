@@ -17,13 +17,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref, watch} from 'vue'
 import { useLayoutStore } from '@/store'
 
 const layoutStore = useLayoutStore()
 const mode = ref({
   isNav: false,
   isBreadcrumb: false
+})
+watch(() => layoutStore.layout, () => {
+  mode.value = {
+    ...mode.value,
+    ...layoutStore.layout
+  }
+}, {
+  deep:true,
+  immediate: true
 })
 const modeChange = () => {
   layoutStore.updateLayout(mode.value)

@@ -10,6 +10,7 @@
       <div class="content_main">
         <div class="breadcrumb" v-if="useLayout.layout.isBreadcrumb">
           <el-breadcrumb separator="/">
+            <el-breadcrumb-item to="/index">首页</el-breadcrumb-item>
             <el-breadcrumb-item
               v-for="(item, index) in breadcrumbList"
               :key="index"
@@ -36,14 +37,20 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const userStore = useUserStore()
 const useLayout = useLayoutStore()
-const breadcrumbList = ref([])
+const breadcrumbList = ref<any>([])
 onMounted(() => {
-  breadcrumbList.value = findBreadcrumb(useLayout.layout.menuList, route.path)
+  breadcrumbList.value = findBreadcrumb(useLayout.menuList, route.path)
 })
 watch(
   () => route.path,
-  (newPath) => {
-    breadcrumbList.value = findBreadcrumb(useLayout.layout.menuList, newPath)
+    (newPath) => {
+    breadcrumbList.value = findBreadcrumb(useLayout.menuList, route.path)
+    if (route.path === '/setting') {
+      breadcrumbList.value = [{
+        name: '设置',
+        path: '/setting'
+      }]
+    }
   }
 )
 const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {

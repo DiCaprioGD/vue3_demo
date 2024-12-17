@@ -7,7 +7,7 @@
     @close="handleClose"
     @select="handleSelect"
   >
-    <template v-for="item in layoutStore.layout.menuList" :key="item.path">
+    <template v-for="item in layoutStore.menuList" :key="item.path">
       <el-menu-item v-if="!item.children || item.children.length === 0" :index="item.path">
         <i v-if="item.icon" class="el-icon"><component :is="item.icon" /></i>
         <span>{{ item.name }}</span>

@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {useUserStore} from "@/store";
+import {useLayoutStore, useUserStore} from "@/store";
 
 const userStore = useUserStore()
+const layoutStore = useLayoutStore()
 onMounted(() => {
   userStore.loadUser()
+  layoutStore.loadLayout()
 })
 </script>
 

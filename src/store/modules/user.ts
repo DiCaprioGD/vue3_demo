@@ -21,6 +21,7 @@ export const useUserStore = defineStore('user', () => {
       user.value = {}
       localStorage.removeItem('user')
     }
+    localStorage.removeItem('layoutBak')
   }
   const loadUser = () => {
     const storedUser = localStorage.getItem('user')
