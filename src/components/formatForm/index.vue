@@ -111,8 +111,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch, defineEmits, defineProps, defineExpose } from 'vue'
-import type { FormInstance, UploadFiles } from 'element-plus'
-import type { FormItem, FormRules, OrganizationFormData } from '@/types/formInfo'
+import type { FormInstance } from 'element-plus'
+import type { FormItem, FormRules } from '@/types/formInfo'
 import type { FormItemRule } from '@/types/formInfo'
 
 const defaultTime: [Date, Date] = [new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 2, 1, 23, 59, 59)]
