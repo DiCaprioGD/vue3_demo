@@ -1,4 +1,7 @@
 <template>
+  <div class="logo">
+    <img style="width: 40px" src="../../../public/vite.svg" alt="Element logo" />
+  </div>
   <el-menu
     class="el-menu-vertical-menu"
     :collapse="layoutStore.layout.isCollapse"
@@ -6,6 +9,7 @@
     @open="handleOpen"
     @close="handleClose"
     @select="handleSelect"
+    style="flex: 1"
   >
     <template v-for="item in layoutStore.menuList" :key="item.path">
       <el-menu-item v-if="!item.children || item.children.length === 0" :index="item.path">
@@ -51,4 +55,12 @@ const handleClose = (key: string) => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-bottom: 1px solid #e9e9e9;
+}
+</style>

@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { Tickets, EditPen, CopyDocument, House, Setting } from '@element-plus/icons-vue'
+import Cookies from 'js-cookie'
 
 export const useLayoutStore = defineStore('layout', () => {
   const layout = ref<Record<any, any>>({
     isCollapse: false,
     isNav: false,
-    isBreadcrumb: false,
+    isBreadcrumb: false
   })
   const menuList = ref([
     {
@@ -54,13 +55,13 @@ export const useLayoutStore = defineStore('layout', () => {
   ])
   const updateLayout = (obj: Record<any, any>) => {
     layout.value = { ...layout.value, ...obj }
-    localStorage.setItem('layoutBak', JSON.stringify(layout.value))
+    Cookies.set('layoutBak', JSON.stringify(layout.value))
   }
   const toggleCollapse = () => {
     layout.value.isCollapse = !layout.value.isCollapse
   }
   const loadLayout = () => {
-    const layoutJSON = localStorage.getItem('layoutBak')
+    const layoutJSON = Cookies.get('layoutBak')
     if (layoutJSON) {
       layout.value = {
         ...layout.value,

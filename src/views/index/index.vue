@@ -1,12 +1,12 @@
 <template>
   <div class="main">
-    <header>
-      <Header></Header>
-    </header>
+    <div v-if="!useLayout.layout.isNav" class="content_menu">
+      <LayoutMenu></LayoutMenu>
+    </div>
     <div class="content">
-      <div v-if="!useLayout.layout.isNav" class="content_menu">
-        <LayoutMenu></LayoutMenu>
-      </div>
+      <header>
+        <Header></Header>
+      </header>
       <div class="content_main">
         <div class="breadcrumb" v-if="useLayout.layout.isBreadcrumb">
           <el-breadcrumb separator="/">
@@ -20,9 +20,9 @@
             </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <el-card class="card">
+        <div class="card">
           <RouterView />
-        </el-card>
+        </div>
       </div>
     </div>
   </div>
@@ -43,13 +43,15 @@ onMounted(() => {
 })
 watch(
   () => route.path,
-    (newPath) => {
+  (newPath) => {
     breadcrumbList.value = findBreadcrumb(useLayout.menuList, route.path)
     if (route.path === '/setting') {
-      breadcrumbList.value = [{
-        name: '设置',
-        path: '/setting'
-      }]
+      breadcrumbList.value = [
+        {
+          name: '设置',
+          path: '/setting'
+        }
+      ]
     }
   }
 )
@@ -74,30 +76,19 @@ const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
 .main {
   width: 100%;
   height: 100%;
+  display: flex;
   .content {
-    height: calc(100% - 60px);
+    width: 100%;
+    height: 100%;
     display: flex;
-    .content_menu {
-      height: 100%;
-      :deep(.el-menu) {
-        border-right: none;
-      }
-      :deep(.el-menu-vertical-menu:not(.el-menu--collapse)) {
-        width: 200px;
-        min-height: 400px;
-      }
-      :deep(.el-icon svg) {
-        width: 1em;
-        height: 1em;
-        vertical-align: middle;
-      }
-    }
+    flex-wrap: wrap;
+    flex-direction: column;
     .content_main {
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
       flex: 1;
-      padding: 1%;
+      padding: var(--padding-LR-2);
       background-color: var(--card-bg-color-1);
       .breadcrumb {
         height: 3%;
@@ -114,6 +105,36 @@ const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
         }
       }
     }
+    .content_main::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+    }
+
+    .content_main::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+      background-color: var(--scrollbar-color);
+    }
+  }
+  .content_menu {
+    height: 100%;
+    :deep(.el-menu) {
+      border-right: none;
+    }
+    :deep(.el-menu-vertical-menu:not(.el-menu--collapse)) {
+      width: 200px;
+      min-height: 400px;
+    }
+    :deep(.el-icon svg) {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
+  }
+
+  :deep(.el-icon) {
+    font-size: var(--size-7);
   }
 }
 </style>

@@ -28,6 +28,10 @@ export const routes = [
         name: 'setting',
         path: '/setting',
         component: () => import('@/views/setting/index.vue')
+      },
+      {
+        path: '/:pathMatch(.*)',
+        component: () => import('@/views/error/404.vue')
       }
     ]
   },

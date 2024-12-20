@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { UserType } from '@/types/user'
 import { ref } from 'vue'
+import Cookies from 'js-cookie'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref<UserType>({
@@ -11,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
   const updateUser = (obj: UserType) => {
     user.value = obj
     user.value.isLoggedIn = true
-    localStorage.setItem('user', JSON.stringify(obj))
+    Cookies.set('user', JSON.stringify(obj), { expires: 7 })
   }
   const logout = () => {
     user.value.token = ''
@@ -19,12 +20,12 @@ export const useUserStore = defineStore('user', () => {
     updateUser(user.value)
     if (!user.value.rememberMe) {
       user.value = {}
-      localStorage.removeItem('user')
+      Cookies.remove('user')
     }
-    localStorage.removeItem('layoutBak')
+    Cookies.remove('layoutBak')
   }
   const loadUser = () => {
-    const storedUser = localStorage.getItem('user')
+    const storedUser = Cookies.get('user')
     if (storedUser) {
       user.value = JSON.parse(storedUser)
       user.value.isLoggedIn = true
