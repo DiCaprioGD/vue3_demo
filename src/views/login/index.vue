@@ -138,7 +138,7 @@ onMounted(() => {
   }
   .login_header {
     height: 56px;
-    padding: 0 24px;
+    padding: 0 var(--size-8);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -157,12 +157,12 @@ onMounted(() => {
     top: 22%;
     left: 5%;
     line-height: 22px;
-    padding: 20px 10px;
+    padding: var(--padding-LR-5) var(--padding-LR-3);
     display: flex;
     flex-direction: column;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-    border-radius: 5px;
+    border-radius: var(--radius-medium);
     z-index: 2;
     .title {
       font-size: 35px;

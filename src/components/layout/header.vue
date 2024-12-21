@@ -65,7 +65,7 @@ const collapseUpdate = () => {
   display: flex;
   align-items: center;
   height: 60px;
-  padding: 0 20px;
+  padding: 0 var(--padding-LR-5);
   border-bottom: 1px solid #e9e9e9;
   :deep(.el-menu) {
     border-right: none;
