@@ -6,7 +6,7 @@
       style="margin-left: var(--size-5)"
       @click="collapseUpdate"
     >
-      <el-tooltip content="收缩菜单" placement="bottom" effect="light">
+      <el-tooltip :content="t('layout.header.collapse')" placement="bottom" effect="light">
         <el-icon><SetUp /></el-icon>
       </el-tooltip>
     </div>
@@ -16,12 +16,22 @@
     <template v-else>
       <div style="flex: 1"></div>
     </template>
-    <el-badge :value="3" class="item" style="margin-right: 10px">
-      <span class="nav-item nav-icon-item">
-        <el-icon><ChatLineRound /></el-icon>
-      </span>
-    </el-badge>
-    <el-dropdown style="margin-right: 10px" trigger="click">
+    <el-tooltip :content="t('layout.header.message')" placement="bottom" effect="light">
+      <el-badge :value="3" class="item" style="margin-right: 10px">
+        <span class="nav-item nav-icon-item">
+          <el-icon><ChatLineRound /></el-icon>
+        </span>
+      </el-badge>
+    </el-tooltip>
+    <el-dropdown
+      style="margin-right: 10px"
+      trigger="click"
+      @command="
+        (val: string) => {
+          changeLang(val)
+        }
+      "
+    >
       <div class="el-dropdown-link nav-item nav-icon-item">
         <el-icon
           ><svg
@@ -48,13 +58,14 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>简体中文</el-dropdown-item>
-          <el-dropdown-item> English </el-dropdown-item>
+          <el-dropdown-item v-for="(lang, index) in langList" :key="index" :command="lang.value">{{
+            lang.content
+          }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
     <div class="nav-item nav-icon-item" style="margin-right: 10px" @click="router.push('/setting')">
-      <el-tooltip content="设置" placement="bottom" effect="light">
+      <el-tooltip :content="t('layout.header.setting')" placement="bottom" effect="light">
         <el-icon><Setting /></el-icon>
       </el-tooltip>
     </div>
@@ -66,8 +77,10 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item :icon="User">个人中心</el-dropdown-item>
-          <el-dropdown-item @click="logout" :icon="SwitchButton"> 退出登录 </el-dropdown-item>
+          <el-dropdown-item :icon="User"> {{ t('constants.user.personalInfo') }} </el-dropdown-item>
+          <el-dropdown-item @click="logout" :icon="SwitchButton">
+            {{ t('constants.user.logout') }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -87,6 +100,9 @@ import {
 import { useLayoutStore, useUserStore } from '@/store'
 import router from '@/router'
 import LayoutMenu from '@/components/layout/layoutMenu.vue'
+import { langList } from '@/locales'
+import { useLocale } from '@/locales/useLocale'
+import { t } from '@/locales'
 
 const userStore = useUserStore()
 const layoutStore = useLayoutStore()
@@ -99,6 +115,11 @@ const logout = () => {
 
 const collapseUpdate = () => {
   layoutStore.toggleCollapse()
+}
+
+const { changeLocale } = useLocale()
+const changeLang = (lang: string) => {
+  changeLocale(lang)
 }
 </script>
 

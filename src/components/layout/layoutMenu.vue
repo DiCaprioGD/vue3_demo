@@ -13,17 +13,23 @@
   >
     <template v-for="item in layoutStore.menuList" :key="item.path">
       <el-menu-item v-if="!item.children || item.children.length === 0" :index="item.path">
-        <i v-if="item.icon" class="el-icon"><component :is="item.icon" /></i>
+        <i v-if="item.icon" class="el-icon"
+          ><component :is="getIconComponent(item.icon)"></component
+        ></i>
         <span>{{ item.name }}</span>
       </el-menu-item>
 
       <el-sub-menu v-else :index="item.path">
         <template #title>
-          <i v-if="item.icon" class="el-icon"><component :is="item.icon" /></i>
+          <i v-if="item.icon" class="el-icon"
+            ><component :is="getIconComponent(item.icon)"></component
+          ></i>
           <span>{{ item.name }}</span>
         </template>
         <el-menu-item v-for="child in item.children" :key="child.path" :index="child.path">
-          <i v-if="child.icon" class="el-icon"><component :is="child.icon" /></i>
+          <i v-if="child.icon" class="el-icon"
+            ><component :is="getIconComponent(child.icon)"></component
+          ></i>
           <span>{{ child.name }}</span>
         </el-menu-item>
       </el-sub-menu>
@@ -32,9 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, resolveComponent } from 'vue'
 import { useLayoutStore } from '@/store'
 import router from '@/router'
+import * as Icons from '@element-plus/icons-vue'
 
 const props = defineProps({
   mode: {
@@ -52,6 +59,10 @@ const handleOpen = (key: string) => {
 }
 const handleClose = (key: string) => {
   console.log(key)
+}
+
+const getIconComponent = (iconName: any) => {
+  return Icons[iconName as keyof typeof Icons]
 }
 </script>
 

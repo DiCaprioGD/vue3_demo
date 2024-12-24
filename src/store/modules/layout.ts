@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { Tickets, EditPen, CopyDocument, House, Setting } from '@element-plus/icons-vue'
 import Cookies from 'js-cookie'
 
 export const useLayoutStore = defineStore('layout', () => {
@@ -13,13 +12,13 @@ export const useLayoutStore = defineStore('layout', () => {
     {
       name: '首页',
       path: '/index',
-      icon: House,
+      icon: 'House',
       children: []
     },
     {
       name: '列表',
       path: 'list',
-      icon: Tickets,
+      icon: 'Tickets',
       children: [
         {
           name: '基础列表',
@@ -31,7 +30,7 @@ export const useLayoutStore = defineStore('layout', () => {
     {
       name: '表单',
       path: 'form',
-      icon: EditPen,
+      icon: 'EditPen',
       children: [
         {
           name: '基础表单',
@@ -43,7 +42,7 @@ export const useLayoutStore = defineStore('layout', () => {
     {
       name: '详情',
       path: 'details',
-      icon: CopyDocument,
+      icon: 'CopyDocument',
       children: [
         {
           name: '基础详情',
