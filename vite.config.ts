@@ -22,8 +22,16 @@ export default defineConfig({
     }
   },
   css: {
-    preprocessorOptions: {
-
-    }
+    preprocessorOptions: {}
   },
+  server: {
+    cors: true,
+    proxy: {
+      '/pub/data/nccf/com/gfs/prod': {
+        target: 'https://nomads.ncep.noaa.gov',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
 })

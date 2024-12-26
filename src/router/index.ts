@@ -11,30 +11,39 @@ export const routes = [
   {
     name: 'index',
     path: '/index',
-    component: () => import('@/views/index/index.vue'),
+    component: () => import('@/views/index/mainIndex.vue'),
     redirect: '/home',
     children: [
       {
         name: 'home',
         path: '/home',
-        component: () => import('@/views/home/index.vue')
+        component: () => import('@/views/home/mainView.vue')
       },
       {
         name: 'list',
         path: '/list',
-        component: () => import('@/views/list/list.vue')
+        component: () => import('@/views/list/listView.vue')
       },
       {
         name: 'setting',
         path: '/setting',
-        component: () => import('@/views/setting/index.vue')
+        component: () => import('@/views/setting/settingView.vue')
+      },
+      {
+        name: 'details',
+        path: '/details',
+        component: () => import('@/views/details/detailsView.vue')
+      },
+      {
+        path: '/:pathMatch(.*)',
+        component: () => import('@/views/error/404View.vue')
       }
     ]
   },
   {
     name: 'login',
     path: '/login',
-    component: () => import('@/views/login/index.vue')
+    component: () => import('@/views/login/loginView.vue')
   }
 ]
 
