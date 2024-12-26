@@ -80,10 +80,15 @@ const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
   .content {
     width: 100%;
     height: 100%;
+    flex: 1;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
+    header {
+      width: 100%;
+    }
     .content_main {
+      overflow: auto;
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;

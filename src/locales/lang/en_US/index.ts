@@ -1,8 +1,10 @@
 import layout from '@/locales/lang/en_US/layout'
+import pages from '@/locales/lang/en_US/pages'
 
 export default {
   lang: 'English',
   layout,
+  pages,
   constants: {
     login: {
       title: 'Login',

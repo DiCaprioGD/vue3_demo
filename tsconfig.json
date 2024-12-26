@@ -6,6 +6,5 @@
   ],
   "compilerOptions":{
     "types": ["element-plus/global"],
-    "verbatimModuleSyntax": true,
   }
 }
