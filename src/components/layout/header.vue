@@ -128,8 +128,8 @@ const changeLang = (lang: string) => {
   display: flex;
   align-items: center;
   height: 60px;
-  padding: 0 var(--padding-LR-5);
   border-bottom: 1px solid #e9e9e9;
+  padding: 0 10px;
   :deep(.el-menu) {
     border-right: none;
   }

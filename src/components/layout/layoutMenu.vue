@@ -1,7 +1,12 @@
 <template>
-  <div class="logo">
-    <img style="width: 40px" src="../../../public/vite.svg" alt="Element logo" />
-  </div>
+  <div
+    v-if="!layoutStore.layout.isNav"
+    :class="{
+      logo: !layoutStore.layout.isCollapse,
+      sh_logo: layoutStore.layout.isCollapse
+    }"
+  ></div>
+  <div class="logo" style="width: 200px" v-else></div>
   <el-menu
     class="el-menu-vertical-menu"
     :collapse="layoutStore.layout.isCollapse"
@@ -68,10 +73,47 @@ const getIconComponent = (iconName: any) => {
 
 <style scoped lang="scss">
 .logo {
+  width: auto;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 60px;
   border-bottom: 1px solid #e9e9e9;
+}
+.logo:after {
+  position: absolute;
+  content: '';
+  width: 60%;
+  max-width: 120px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('@/assets/images/home/logo.png') no-repeat;
+  background-size: 100% 100%;
+  transition: all 0.3s ease;
+}
+.sh_logo {
+  width: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.sh_logo:after {
+  position: absolute;
+  content: '';
+  width: 80%;
+  max-width: 50px;
+  height: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('@/assets/images/home/en_logo.png') no-repeat;
+  background-size: 100% 100%;
+  transition: all 0.3s ease;
 }
 </style>

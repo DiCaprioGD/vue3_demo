@@ -39,7 +39,7 @@
       </div>
       <div class="form_container">
         <FormatForm @confirm="login" ref="form" :form-item="loginItem" />
-        <el-button @click="btnConfirm" style="width: 100%" type="primary">{{
+        <el-button @click="btnConfirm" v-loading="isLogin" style="width: 100%" type="primary">{{
           isRegister ? '注册' : '登录'
         }}</el-button>
       </div>
@@ -55,6 +55,7 @@ import { useUserStore } from '@/store'
 import router from '@/router'
 
 const isRegister = ref(false)
+const isLogin = ref(false)
 const form = ref()
 const store = useUserStore()
 const loginItem = ref([
@@ -109,12 +110,14 @@ const btnConfirm = () => {
   form.value.saveFn()
 }
 const login = (form: Record<any, any>) => {
+  isLogin.value = true
   let obj = {
     ...form,
     token: '111'
   }
   store.updateUser(obj)
   router.push('/index')
+  isLogin.value = false
 }
 const btnHref = (link: string) => {
   if (!link) return
