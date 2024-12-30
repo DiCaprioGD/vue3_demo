@@ -1,6 +1,7 @@
 export default {
-  topNav: '顶部菜单',
-  leftNav: '左侧菜单',
+  topNav: '上下布局',
+  leftNav: '左右布局',
+  tNav: 'T型布局',
   showBreadcrumb: '展示面包屑',
   hiddenBreadcrumb: '不展示面包屑'
 }
