@@ -50,6 +50,18 @@ export const useLayoutStore = defineStore('layout', () => {
           children: []
         }
       ]
+    },
+    {
+      name: '3D',
+      path: '3D',
+      icon: 'ElementPlus',
+      children: [
+        {
+          name: '3D图形查看',
+          path: '/3Dview',
+          children: []
+        }
+      ]
     }
   ])
   const updateLayout = (obj: Record<any, any>) => {

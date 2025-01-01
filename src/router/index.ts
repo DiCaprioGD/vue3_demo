@@ -35,6 +35,11 @@ export const routes = [
         component: () => import('@/views/details/detailsView.vue')
       },
       {
+        name: '3Dview',
+        path: '/3Dview',
+        component: () => import('@/views/3Dview/3Dview.vue')
+      },
+      {
         path: '/:pathMatch(.*)',
         component: () => import('@/views/error/404View.vue')
       }
