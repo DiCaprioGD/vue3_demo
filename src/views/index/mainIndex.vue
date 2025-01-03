@@ -80,19 +80,19 @@ const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
   .content {
     width: 100%;
     height: 100%;
-    flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     header {
       width: 100%;
     }
     .content_main {
       overflow: auto;
       width: 100%;
+      height: 100%;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-      flex: 1;
       padding: var(--padding-LR-2);
       background-color: var(--card-bg-color-1);
       .breadcrumb {
@@ -100,7 +100,8 @@ const findBreadcrumb = (menu: any, path: any, breadcrumb = []): any => {
       }
       .card {
         width: 100%;
-        flex: 1;
+        height: 100%;
+        overflow: auto;
         :deep(.el-card) {
           box-shadow: none;
         }

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { DesignRoutes } from '@/router/DesignRoutes/DesignRoutes'
 NProgress.configure({ showSpinner: false })
 export const routes = [
   {
@@ -42,7 +43,8 @@ export const routes = [
       {
         path: '/:pathMatch(.*)',
         component: () => import('@/views/error/404View.vue')
-      }
+      },
+      ...DesignRoutes
     ]
   },
   {

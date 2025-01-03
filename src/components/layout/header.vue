@@ -16,6 +16,27 @@
     <template v-else>
       <div style="flex: 1"></div>
     </template>
+    <el-dropdown
+      style="margin-right: 10px"
+      trigger="click"
+      @command="
+        (val: string) => {
+          changeSys(val)
+        }
+      "
+    >
+      <div class="el-dropdown-link nav-item nav-item-text">系统切换</div>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item
+            v-for="(item, index) in layoutStore.sysList"
+            :key="index"
+            :command="item.value"
+            >{{ item.name }}</el-dropdown-item
+          >
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
     <el-tooltip :content="t('layout.header.message')" placement="bottom" effect="light">
       <el-badge :value="3" class="item" style="margin-right: 10px">
         <span class="nav-item nav-icon-item">
@@ -120,6 +141,9 @@ const collapseUpdate = () => {
 const { changeLocale } = useLocale()
 const changeLang = (lang: string) => {
   changeLocale(lang)
+}
+const changeSys = (sys: string) => {
+  layoutStore.toggleSys(sys)
 }
 </script>
 

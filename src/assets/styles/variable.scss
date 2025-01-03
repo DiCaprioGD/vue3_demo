@@ -1,4 +1,5 @@
 @use "reset";
+@use 'sys-style/font';
 @use 'sys-style/sys';
 body {
   margin: 0;
@@ -28,6 +29,7 @@ body {
   --size-3: 6px;
   --size-4: 8px;
   --size-5: 12px;
+  --size-normal: 14px;
   --size-6: 16px;
   --size-7: 20px;
   --size-8: 24px;
@@ -58,7 +60,28 @@ body {
   --padding-LR-3: var(--size-5);
   --padding-LR-4: var(--size-6);
   --padding-LR-5: var(--size-7);
+  --padding-LR-6: var(--size-8);
   --scrollbar-color: rgba(0, 0, 0, 0.1)
+}
+.sys-title {
+  font-weight: bold;
+  color: var(--font-color-gray-1);
+  margin-bottom: var(--size-5);
+}
+h1.sys-title {
+  font-size: var(--size-12);
+}
+h2.sys-title {
+  font-size: var(--size-9);
+}
+h3.sys-title {
+  font-size: var(--size-8);
+  font-weight: bold;
+  color: var(--font-color-gray-1);
+}
+p.sys-info {
+  font-size: var(--size-normal);
+  color: var(--gray-color-6);
 }
 .nav-item {
   width: var(--size-10);
@@ -91,9 +114,22 @@ body {
   width: var(--size-10);
 }
 .nav-item-text {
+  width: auto;
   padding-left: var(--padding-LR-4);
   padding-right: var(--padding-LR-4);
 }
 .nav-item:hover {
   background-color: var(--gray-color-1);
+}
+
+.sys-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: var(--size-3);
+  color: var(--gray-color-8);
+  overflow: auto;
+  padding: var(--size-6);
 }
